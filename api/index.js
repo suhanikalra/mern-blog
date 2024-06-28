@@ -1,12 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoutes from './routes/user.route.js';
 
-dotenv.config(); // Load environment variables from .env file
+dotenv.config();
 
-const app = express();
-
-// // Connect to MongoDB
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
@@ -15,12 +13,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+const app = express();
 
-
-
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-
+app.listen(3000, () => {
+  console.log('Server is running on port 3000!');
 });
+
+app.use('/api/user', userRoutes);
